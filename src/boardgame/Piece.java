@@ -1,6 +1,8 @@
 package boardgame;
 
-public class Piece {
+
+
+public abstract class Piece {
 	
 	protected Position position; //nao quero q essa posicao seja visivel na camada de xadrez
 	private Board board;
@@ -15,7 +17,22 @@ public class Piece {
 	}
 
 
+	public abstract boolean[][] possibleMoves();
+
+	public boolean possibleMove(Position position) {
+		return possibleMoves()[position.getRow()][position.getColumn()];
+	}
 	
-	
+	public boolean isThereAnyPossibleMove() {
+		boolean[][] mat = possibleMoves();
+		for(int i=0; i<mat.length; i++) {
+			for(int j=0; j<mat.length; j++) {
+				if(mat[i][j]) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 
 }
